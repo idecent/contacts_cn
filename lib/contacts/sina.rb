@@ -32,7 +32,14 @@ class Contacts
       	if resp.code_type != Net::HTTPOK
           raise ConnectionError, self.class.const_get(:PROTOCOL_ERROR)
         end
-        parse(data)
+        Rails.logger.debug "-----------"
+        Rails.logger.debug data
+        Rails.logger.debug "-----------"
+        if data.nil?
+          return []
+        else
+          parse(data)
+        end
       end
     end
 
